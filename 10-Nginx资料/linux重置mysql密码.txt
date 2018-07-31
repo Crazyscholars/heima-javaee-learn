@@ -1,0 +1,18 @@
+如果忘记mysql的root密码可以采取下面的步骤重新设置
+
+1。kill掉所有mysql的进程
+
+2。使用--skip-grant-tables的参数启动mysql
+
+shell> mysqld_safe --skip-grant-tables
+
+3。在打开一个连接,设置新的密码，
+mysql> UPDATE mysql.user SET Password=PASSWORD('newpwd')
+
+-> WHERE User='root';
+
+mysql> FLUSH PRIVILEGES;
+
+4。停止mysql server，用正常的模式启动
+
+5。OK，可以使用新设置的密码了
